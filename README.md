@@ -31,7 +31,13 @@ ToolsMax Ecommerce Project is an ecommerce platform built using various technolo
 2. Install dependencies: `pip install -r requirements.txt`
 3. Run the Flask application: `python app.py`
 4. Access the application via the browser: `http://localhost:5000`
-
+## Screenshot
+![Screenshot 2024-02-26 170316](https://github.com/DINESH1611/Toolsmax/assets/154213856/8c362c0c-6d7a-4fe4-bcd9-3728c33c68d1)
+![Screenshot 2024-02-26 170342](https://github.com/DINESH1611/Toolsmax/assets/154213856/20466383-7cf3-4f0a-acf6-fea15271d33b)
+![Screenshot 2024-02-26 170112](https://github.com/DINESH1611/Toolsmax/assets/154213856/0cde98d7-f6fd-4990-87b1-754444a40e01)
+![Screenshot 2024-02-26 170150](https://github.com/DINESH1611/Toolsmax/assets/154213856/b6c37646-9838-4821-8698-065c9d9a0011)
+![Screenshot 2024-02-26 170213](https://github.com/DINESH1611/Toolsmax/assets/154213856/135694d3-ce23-4a9e-83bc-7d0f4db7d2b0)
+![Screenshot 2024-02-26 170247](https://github.com/DINESH1611/Toolsmax/assets/154213856/d6693e34-5043-4215-a943-f674b036a5e3)
 
 
 ## License
