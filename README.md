@@ -27,7 +27,7 @@ ToolsMax Ecommerce Project is an ecommerce platform built using various technolo
 - **Responsive Design**: Ensure compatibility across various devices and screen sizes for optimal user experience.
 
 ## Setup Instructions
-1. Clone the repository: `git clone `
+1. Clone the repository: `git clone `https://github.com/DINESH1611/Toolsmax
 2. Install dependencies: `pip install -r requirements.txt`
 3. Run the Flask application: `python app.py`
 4. Access the application via the browser: `http://localhost:5000`
