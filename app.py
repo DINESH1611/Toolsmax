@@ -171,6 +171,141 @@ def cartform():
 @app.route('/salesacc')
 def salesacc():
     return render_template("salesacc.html")  
+
+@app.route('/admin')
+def admin():
+    return render_template("admin.html")  
+
+
+
+@app.route('/rentform')
+def welcome():
+    return render_template('rentform.html')
+@app.route('/order')
+def aorders():
+    conn = sqlite3.connect('admin.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT id,name, email, fdate, tdate, address, phone, city, state FROM orders")
+    order_data = cursor.fetchall()
+    conn.close()
+    return render_template('order.html',order_data=order_data)
+
+def connect_db():
+    return sqlite3.connect('admin.db')
+
+# Create a function to initialize the database tables
+def init_db():
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute('''CREATE TABLE IF NOT EXISTS orders (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT,
+                    email TEXT,
+                    fdate DATE,
+                    tdate DATE,
+                    address TEXT,
+                    phone TEXT,
+                    city TEXT,
+                    state TEXT
+                )''')
+    conn.commit()
+    conn.close()
+
+# Initialize the database tables when the app starts
+init_db()
+
+# Route to render the checkout page
+@app.route('/rentform')
+def checkout():
+    return render_template('rentform.html')
+
+# Route to handle the checkout form submission
+@app.route('/rentform', methods=['POST'])
+def process_checkout():
+    if request.method == 'POST':
+        # Retrieve form data
+        name = request.form['name']
+        email = request.form['email']
+        fdate = request.form['fdate']
+        tdate = request.form['tdate']
+        address = request.form['address']
+        phone = request.form['phone']
+        city = request.form['city']
+        state = request.form['state']
+
+        # Save form data to the database
+        conn = connect_db()
+        cur = conn.cursor()
+        cur.execute("INSERT INTO orders (name, email, fdate, tdate, address, phone, city, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                    (name, email, fdate, tdate, address, phone, city, state))
+        conn.commit()
+        conn.close()
+
+        return redirect('/rentacc')  # Redirect to a thank you page after successful submission
+
+
+@app.route('/cartform')
+def welcomea():
+    return render_template('cartform.html')
+@app.route('/cartorder')
+def cartorders():
+    conn = sqlite3.connect('admin.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT id,name, email, address, phone, city, state FROM cartorders")
+    order_data = cursor.fetchall()
+    conn.close()
+    return render_template('cartorder.html',order_data=order_data)
+
+def connect_db():
+    return sqlite3.connect('admin.db')
+
+# Create a function to initialize the database tables
+def init_db():
+    conn = connect_db()
+    cur = conn.cursor()
+    cur.execute('''CREATE TABLE IF NOT EXISTS cartorders (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    name TEXT,
+                    email TEXT,
+                    address TEXT,
+                    phone TEXT,
+                    city TEXT,
+                    state TEXT
+                )''')
+    conn.commit()
+    conn.close()
+
+# Initialize the database tables when the app starts
+init_db()
+
+# Route to render the checkout page
+@app.route('/cartform')
+def checkoutt():
+    return render_template('cartform.html')
+
+# Route to handle the checkout form submission
+@app.route('/cartform', methods=['POST'])
+def process_checkoutt():
+    if request.method == 'POST':
+        # Retrieve form data
+        name = request.form['name']
+        email = request.form['email']
+        
+        address = request.form['address']
+        phone = request.form['phone']
+        city = request.form['city']
+        state = request.form['state']
+
+        # Save form data to the database
+        conn = connect_db()
+        cur = conn.cursor()
+        cur.execute("INSERT INTO cartorders (name, email, address, phone, city, state) VALUES (?, ?, ?, ?, ?, ?)",
+                    (name, email, address, phone, city, state))
+        conn.commit()
+        conn.close()
+
+        return redirect('/salesacc')  # Redirect to a thank you page after successful submission
+
 if __name__ == '__main__':
     app.run(debug=True)
 
