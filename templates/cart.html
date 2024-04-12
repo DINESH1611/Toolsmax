@@ -30,12 +30,11 @@
             <a href="https://twitter.com/?lang=en-in"><i class="fa-brands fa-twitter"></i></a>
         </div>
         <div class="other-links">
-            <button id="btn-login"><a href="/login">Login</a></button>
-            <button id="btn-signup"><a href="/signup">Sign up</a></button>
+            <button id="btn-login"><a href="/sales">back</a></button>
+            <button id="btn-signup"><a href="/">home</a></button>
 
             
            
-            <a href="/cartform"><i class="fa fa-shopping-cart "></i><span class="badge" style="background-color: #000;border-radius: 100%;" id="cartincrement">0</span></a>
          
         </div>
     </div>
@@ -126,7 +125,7 @@
                             <h3>${item.name}</h3>
                             <p>Price: $${item.price}</p>
                             <p>Quantity: ${item.quantity}</p>
-                            <button onclick="incrementItem('${item.name}')">+</button>
+                            <button onclick="incrementItem('${item.name}')"> + </button>
                             <button onclick="decrementItem('${item.name}')">-</button>
                             <button onclick="removeItem('${item.name}')">Remove</button>
                         </div>
