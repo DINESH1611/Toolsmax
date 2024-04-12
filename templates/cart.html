@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolsMax</title>
+    <link rel="shortcut icon" type="image" href="./image/logo2.png">
+    <link rel="shortcut icon" type="image" href="{{ url_for('static', filename='images/logo.png') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <!-- bootstrap links -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- bootstrap links -->
+    <!-- fonts links -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <!-- fonts links -->
+</head>
+<body>
+
+    <!-- top navbar -->
+    <div class="top-navbar">
+        <div class="top-icons">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" width="100px" height="100px" >
+            <a href="https://www.instagram.com/?hl=en"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://twitter.com/?lang=en-in"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+        <div class="other-links">
+            <button id="btn-login"><a href="/login">Login</a></button>
+            <button id="btn-signup"><a href="/signup">Sign up</a></button>
+
+            
+           
+            <a href="/cartform"><i class="fa fa-shopping-cart "></i><span class="badge" style="background-color: #000;border-radius: 100%;" id="cartincrement">0</span></a>
+         
+        </div>
+    </div>
+    <div class="home-section">
+        <!-- navbar -->
+        <nav class="navbar navbar-expand-lg" id="navbar">
+            <div class="container-fluid">
+            
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span><i class="fa-solid fa-bars" style="color: white;"></i></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/sales">Sales</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/rent">Rent</a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" href="/about">About Us</a>
+                  </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/contact">Contact Us</a>
+                  </li>
+                </ul>
+               
+                
+              </div>
+            </div>
+          </nav>
+        <!-- navbar -->
+
+        <!-- Cart items section -->
+    <div id="cart-items">
+        <!-- Cart items will be dynamically populated here -->
+    </div>
+    
+    <!-- Total and checkout button -->
+    <div id="cart-total">
+        <h2>Total: <span id="total-amount">RS 0.00</span></h2>
+        <a href="/cartform"><button>Checkout</button></a>
+    </div>
+
+    <!-- JavaScript functions for cart functionality -->
+    <script>
+        // Function to add item to cart
+        function addToCart(productName, price, imageSrc) {
+            // Create a new item object
+            const item = { name: productName, price: price, image: imageSrc, quantity: 1 };
+
+            // Get the cart from local storage or initialize an empty array
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Check if the item is already in the cart
+            const existingItem = cart.find(i => i.name === productName);
+            if (existingItem) {
+                existingItem.quantity++; // If so, increment its quantity
+            } else {
+                cart.push(item); // Otherwise, add the item to the cart
+            }
+
+            // Save the updated cart back to local storage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Update the cart display
+            displayCart();
+        }
+
+        // Function to display cart items
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = ''; // Clear previous items
+
+            // Loop through cart items and create HTML elements
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.innerHTML = `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="item-details">
+                            <h3>${item.name}</h3>
+                            <p>Price: $${item.price}</p>
+                            <p>Quantity: ${item.quantity}</p>
+                            <button onclick="incrementItem('${item.name}')">+</button>
+                            <button onclick="decrementItem('${item.name}')">-</button>
+                            <button onclick="removeItem('${item.name}')">Remove</button>
+                        </div>
+                    </div>
+                `;
+                cartItemsDiv.appendChild(itemDiv);
+            });
+
+            // Calculate and display total amount
+            const totalAmountSpan = document.getElementById('total-amount');
+            const totalAmount = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+            totalAmountSpan.textContent = `$${totalAmount.toFixed(2)}`;
+        }
+
+        // Function to increment item quantity
+        function incrementItem(productName) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = cart.find(i => i.name === productName);
+            if (item) {
+                item.quantity++;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCart();
+            }
+        }
+
+        // Function to decrement item quantity
+        function decrementItem(productName) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = cart.find(i => i.name === productName);
+            if (item && item.quantity > 1) {
+                item.quantity--;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                displayCart();
+            }
+        }
+
+        // Function to remove item from cart
+        function removeItem(productName) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.name !== productName);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+        }
+
+        // Function to perform checkout
+        function checkout() {
+            // Implement the checkout process here
+            alert('Checkout functionality will be implemented later.');
+        }
+
+        // Call displayCart function when the page loads
+        window.onload = displayCart;
+    </script>
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script><script src="main.js"></script>
+    
+</body>
+
+</html>

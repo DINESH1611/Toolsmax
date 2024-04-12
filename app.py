@@ -170,7 +170,11 @@ def cartform():
 
 @app.route('/salesacc')
 def salesacc():
-    return render_template("salesacc.html")  
+    return render_template("salesacc.html") 
+
+@app.route('/cart')
+def cart():
+    return render_template("cart.html") 
 
 @app.route('/admin')
 def admin():
