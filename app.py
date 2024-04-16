@@ -160,6 +160,10 @@ def sales():
 def signup():
     return render_template("signup.html")
 
+@app.route('/adlogin')
+def adlogin():
+    return render_template("adminlogin.html")
+
 @app.route('/truck')
 def truck():
     return render_template("truck.html")
