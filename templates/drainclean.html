@@ -36,7 +36,7 @@
 
             
            
-            <a href="/cartform"><i class="fa fa-shopping-cart "></i><span class="badge" style="background-color: #000;border-radius: 100%;" id="cartincrement">0</span></a>
+            <a href="/cart"><i class="fa fa-shopping-cart "></i><span></span></a>
        
          
         </div>
@@ -94,7 +94,7 @@
                       <h3>small-drain-cleaner </h3>
                       <h2>MRP-<strike> Rs:4500 </strike>Rs:3000</h2>
                       <p>Designed exclusively for the rental industry, the Classen 18" Compact Aerator (CA-18) is the ideal aerator for moderate and small sized properties.This unit is easy to rent with a fold-down handle, removable weights, tie-down brackets and side lift handles. Classen… Serious lawn care made easy.</p>
-                      <button id="shopnow" onclick="incrementButton()">Add to cart</button> 
+                      <button onclick="addToCart('small-drain-cleaner',3000, '{{ url_for('static', filename='rentimages/small-drain-cleaners-.webp') }}')">Add to cart</button> 
                        </center>
                   </div>
               </div>
@@ -110,7 +110,7 @@
                         <h3>Medium-drain-cleaner </h3>
                         <h2>MRP-<strike> Rs:5000 </strike>Rs:3599</h2>
                       <p>Designed exclusively for the rental industry, the Classen 18" Compact Aerator (CA-18) is the ideal aerator for moderate and small sized properties.This unit is easy to rent with a fold-down handle, removable weights, tie-down brackets and side lift handles. Classen… Serious lawn care made easy.</p>
-                      <button id="shopnow" onclick="incrementButton()">Add to cart</button> 
+                      <button onclick="addToCart('Medium-drain-cleaner',3599, '{{ url_for('static', filename='rentimages/medium-drain-cleaners-.webp') }}')">Add to cart</button> 
                        </center>
 
                   </div>
@@ -127,8 +127,8 @@
                         <h3>Large-drain-cleaner </h3>
                         <h2>MRP-<strike> <Rs:7000></Rs:7000> </strike>Rs:5999</h2>
                         <p>Designed exclusively for the rental industry, the Classen 18" Compact Aerator (CA-18) is the ideal aerator for moderate and small sized properties.This unit is easy to rent with a fold-down handle, removable weights, tie-down brackets and side lift handles. Classen… Serious lawn care made easy.</p>
-                        <button id="shopnow" onclick="incrementButton()">Add to cart</button> 
-                     </center>
+                        <button onclick="addToCart('large-drain-cleaners',5999, '{{ url_for('static', filename='rentimages/large-drain-cleaners-.avif') }}')">Add to cart</button> 
+                      </center>
 
                 </div>
             </div>
