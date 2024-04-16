@@ -37,7 +37,7 @@ function displayCart() {
         const itemDiv = document.createElement('div');
         itemDiv.innerHTML = `
             <div class="cart-item">
-                <img src="${item.image}" alt="${item.name}">
+                <img src="${item.image}" alt="${item.name}" style="width: 10px; height: 10px;>
                 <div class="item-details">
                     <h3>${item.name}</h3>
                     <p>Price: $${item.price}</p>
